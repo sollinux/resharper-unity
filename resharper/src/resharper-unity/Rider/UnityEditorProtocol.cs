@@ -179,7 +179,7 @@ namespace JetBrains.ReSharper.Plugins.Unity.Rider
                         () => { myUnityModel.SetValue(model, myReadonlyToken); });
                     lf.AddAction(() =>
                     {
-                        myLocks.ExecuteOrQueueEx(myLifetime, "clearModel", () =>
+                        myLocks.Dispatcher.Invoke("clearModel", () =>
                         {
                             myLogger.Info("Wire disconnected.");
                             solution.SetCustomData("UNITY_SessionInitialized", "false");
