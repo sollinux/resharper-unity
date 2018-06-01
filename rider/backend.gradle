@@ -57,16 +57,22 @@ class MSBuildTask extends DefaultTask {
 
         // HACK: gradle sometimes swallows MSBuild output, this helps
         def output = new ByteArrayOutputStream()
-        project.exec {
+        def execResult = project.exec {
             executable = findMSBuildPath()
             args = arguments
             standardOutput = output
+            ignoreExitValue = true
 //            standardOutput = System.out
 //            logging.captureStandardOutput(LogLevel.LIFECYCLE)
 //            logging.captureStandardError(LogLevel.ERROR)
         }
 
         logger.lifecycle(output.toString())
+
+        def exitCode = execResult.exitValue
+        if (exitCode != 0){
+            throw new GradleException("MSBuild exited wit non-zero code: $exitCode")
+        }
     }
 
     def findMSBuildPath() {
