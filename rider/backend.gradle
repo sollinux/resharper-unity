@@ -52,13 +52,21 @@ class MSBuildTask extends DefaultTask {
     def build() {
         project.ci.Progress("Building $buildFile ($project.BuildConfiguration)")
 
-        def arguments = [ buildFile, "/p:Configuration=$project.BuildConfiguration", "/p:Version=$project.version", '/v:normal', '/nologo'] //, "/bl:${buildFile.name}.binlog" ]
+        def arguments = [ buildFile, "/p:Configuration=$project.BuildConfiguration", "/p:Version=$project.version", '/v:detailed', '/nologo'] //, "/bl:${buildFile.name}.binlog" ]
         arguments.addAll(project.extraMSBuildArgs)
+
+        // HACK: gradle sometimes swallows MSBuild output, this helps
+        def output = new ByteArrayOutputStream()
         project.exec {
             executable = findMSBuildPath()
             args = arguments
-            standardOutput = System.out
+            standardOutput = output
+//            standardOutput = System.out
+//            logging.captureStandardOutput(LogLevel.LIFECYCLE)
+//            logging.captureStandardError(LogLevel.ERROR)
         }
+
+        logger.lifecycle(output.toString())
     }
 
     def findMSBuildPath() {
@@ -139,7 +147,7 @@ class RestorePackagesTask extends DefaultTask {
         project.exec {
             executable = 'dotnet'
             args = restoreArguments
-            standardOutput = System.out
+//            standardOutput = System.out
         }
     }
 }
