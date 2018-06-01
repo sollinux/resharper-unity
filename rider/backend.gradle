@@ -52,7 +52,7 @@ class MSBuildTask extends DefaultTask {
     def build() {
         project.ci.Progress("Building $buildFile ($project.BuildConfiguration)")
 
-        def arguments = [ buildFile, "/p:Configuration=$project.BuildConfiguration", "/p:Version=$project.version", '/v:detailed', '/nologo'] //, "/bl:${buildFile.name}.binlog" ]
+        def arguments = [ buildFile, "/p:Configuration=$project.BuildConfiguration", "/p:Version=$project.version", '/nologo'] //, "/bl:${buildFile.name}.binlog" ]
         arguments.addAll(project.extraMSBuildArgs)
 
         // HACK: gradle sometimes swallows MSBuild output, this helps
