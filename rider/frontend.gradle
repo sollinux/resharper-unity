@@ -66,7 +66,7 @@ else {
 
 ext.rdLibDirectory = new File(frontendSdkRoot, "lib/rd").canonicalFile
 
-ext.kotlin_version = '1.2.10'
+ext.kotlin_version = '1.2.41'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
