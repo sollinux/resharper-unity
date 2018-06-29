@@ -23,6 +23,11 @@ configurations {
     reSharper
 }
 
+repositories {
+    maven { url "https://cache-redirector.jetbrains.com/intellij-repository/snapshots" }
+    maven { url "https://cache-redirector.jetbrains.com/maven-central" }
+}
+
 dependencies {
     reSharper group: "com.jetbrains.intellij.resharper", name: "resharperUltimatePackages", version: "LATEST-TRUNK-SNAPSHOT", ext: "zip"
 }
