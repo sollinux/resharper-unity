@@ -25,7 +25,7 @@ configurations {
 
 repositories {
     maven { url "https://cache-redirector.jetbrains.com/intellij-repository/snapshots" }
-    maven { url "https://repo.maven.apache.org/maven2/" }
+    maven { url "https://cache-redirector.jetbrains.com/maven-central" }
 }
 
 dependencies {

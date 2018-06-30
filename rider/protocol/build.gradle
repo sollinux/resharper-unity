@@ -10,7 +10,7 @@ dependencies {
 }
 
 repositories {
-    maven { url "https://repo.maven.apache.org/maven2/" }
+    maven { url "https://cache-redirector.jetbrains.com/maven-central" }
     flatDir {
         dirs rdLibDirectory.absolutePath
     }
